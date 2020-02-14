@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PlatService } from '../../services/plat.service';
 
 @Component({
   selector: 'app-plats',
@@ -7,35 +8,36 @@ import { Router } from '@angular/router';
   styleUrls: ['./plats.page.scss'],
 })
 export class PlatsPage implements OnInit {
-  plats = [
-    {
-      id: '1',
-      nom: 'Theip',
-      prix: '1500'
+  plats = [];
 
+  constructor(private router: Router, private platService: PlatService) {
+    this.getAllPlats();
+  }
+
+  getAllPlats() {
+    this.platService.getAll().subscribe(data => {
+      this.plats = data;
     },
-    {
-      id: '2',
-      nom: 'Mafé',
-      prix: '1000'
-
-    },
-    {
-      id: '3',
-      nom: 'Diaga',
-      prix: '1700'
-
-    }
-  ];
-
-  constructor(private router: Router) { }
+    error => {
+      console.log('Une erreur est surenue');
+    });
+  }
 
   ngOnInit() {
   }
+  ionViewWillEnter() {
+    this.getAllPlats();
+  }
+
   addPlat() {
     this.router.navigateByUrl('plats/ajouter');
   }
   update(id: number) {
     this.router.navigate(['plats/modifier', id]);
+  }
+
+  deletePlat(id: number) {
+    console.log(id);
+    this.platService.deletePlat(id).subscribe(() => { this.getAllPlats(); });
   }
 }

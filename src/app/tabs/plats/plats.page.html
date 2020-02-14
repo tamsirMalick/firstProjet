@@ -16,9 +16,15 @@
     </ion-fab-button>
   </ion-fab>
   <ion-list *ngFor="let plat of plats">
-    <ion-item (click)="update(plat.id)">
-      <ion-label>{{plat.nom}}</ion-label>
-      <ion-label>{{plat.prix}}</ion-label>
-    </ion-item>
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+            <ion-label>{{plat.nom}}</ion-label>
+            <ion-label>{{plat.prix}}</ion-label>
+            <ion-icon class="marge-right" color="danger" name="trash" (click)="deletePlat(plat.id)"></ion-icon>
+            <ion-icon name="create" (click)="update(plat.id)"></ion-icon>
+         </ion-item>
+      </ion-card-content>
+    </ion-card>
   </ion-list>
 </ion-content>
