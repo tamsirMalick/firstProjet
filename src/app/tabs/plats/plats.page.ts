@@ -37,7 +37,8 @@ export class PlatsPage implements OnInit {
   }
 
   deletePlat(id: number) {
-    console.log(id);
-    this.platService.deletePlat(id).subscribe(() => { this.getAllPlats(); });
+    if (confirm('Voulez vous supprier ce plat')) {
+      this.platService.deletePlat(id).subscribe(() => { this.getAllPlats(); });
+    }
   }
 }

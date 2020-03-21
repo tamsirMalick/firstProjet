@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'compte',
     loadChildren: () => import('./tabs/compte/compte.module').then( m => m.ComptePageModule)
+  },
+  {
+    path: 'commande',
+    loadChildren: () => import('./commande/commande.module').then( m => m.CommandePageModule)
   }
 ];
 
